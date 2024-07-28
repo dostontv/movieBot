@@ -16,7 +16,7 @@ class Base(DeclarativeBase):
 
 class AbstractClass:
     @staticmethod
-    async def commit():
+    def commit():
         try:
             session.commit()
         except Exception:
@@ -24,14 +24,14 @@ class AbstractClass:
             raise
 
     @classmethod
-    async def create(cls, **kwargs):  # Create
+    def create(cls, **kwargs):  # Create
         object_ = cls(**kwargs)
         session.add(object_)
         cls.commit()
         return object_
 
     @classmethod
-    async def update(cls, id_, **kwargs):
+    def update(cls, id_, **kwargs):
         query = (
             sqlalchemy_update(cls)
             .where(cls.id == id_)
@@ -42,16 +42,16 @@ class AbstractClass:
         cls.commit()
 
     @classmethod
-    async def get(cls, id_):
+    def get(cls, id_):
         query = select(cls).where(cls.id == id_)
         return (session.execute(query)).scalar()
 
     @classmethod
-    async def delete(cls, id_):
+    def delete(cls, id_):
         query = sqlalchemy_delete(cls).where(cls.id == id_)
         session.execute(query)
         cls.commit()
 
     @classmethod
-    async def get_all(cls):
+    def get_all(cls):
         return (session.execute(select(cls))).scalars()
