@@ -2,6 +2,7 @@ import os
 from dataclasses import dataclass, asdict
 
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
 
 load_dotenv('.env')
 
@@ -23,7 +24,7 @@ class DatabaseConfig(BaseConfig):
 
     @property
     def db_url(self):
-        return f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
+        return create_engine(f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}")
 
 
 @dataclass

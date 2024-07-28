@@ -1,17 +1,17 @@
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Session
 
-from config import DatabaseConfig
+from config import DatabaseConfig, conf
 
-session = Session(DatabaseConfig().session_url)
-from sqlalchemy import delete as sqlalchemy_delete, Column, DateTime, update as sqlalchemy_update
+from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update
 from sqlalchemy.future import select
+
+session = Session(conf.db.db_url)
+
+
 class Base(DeclarativeBase):
     @declared_attr
     def __tablename__(self) -> str:
         return self.__name__.lower() + 's'
-
-
-
 
 
 class AbstractClass:
@@ -55,4 +55,3 @@ class AbstractClass:
     @classmethod
     async def get_all(cls):
         return (session.execute(select(cls))).scalars()
-

@@ -9,20 +9,19 @@ from aiogram.enums import ParseMode
 from dotenv import load_dotenv
 
 from bot.handlers import private_handler_router
-
+from config import conf
+from db.base import Base
 
 load_dotenv('.env')
-
-TOKEN = getenv("BOT_TOKEN")
 
 
 async def main() -> None:
     dp = Dispatcher()
     dp.include_router(private_handler_router)
-    Base.metadata.create_all(DB.engine)
+    Base.metadata.create_all(conf.db.db_url)
 
     # Initialize Bot instance with default bot properties which will be passed to all API calls
-    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(token=conf.bot.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     # And the run events dispatching
     await dp.start_polling(bot)
