@@ -1,1 +1,1 @@
-from db.models.user import User
+from db.models.models import User
