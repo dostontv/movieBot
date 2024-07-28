@@ -19,7 +19,7 @@ class User(Base, AbstractClass):
 class Movie(Base, AbstractClass):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(VARCHAR)
-    movies = relationship('Genre', secondary=give_users, back_populates='authors', lazy='joined')
+    genres = relationship('Genre', secondary=give_users, back_populates='authors', lazy='joined')
 
 
 class Genre(Base, AbstractClass):
