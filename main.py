@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 
 from bot.handlers import private_handler_router
 
+
 load_dotenv('.env')
 
 TOKEN = getenv("BOT_TOKEN")
