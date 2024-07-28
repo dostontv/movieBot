@@ -19,13 +19,13 @@ class User(Base, AbstractClass):
 class Movie(Base, AbstractClass):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(VARCHAR)
-    genres = relationship('Genre', secondary=give_users, back_populates='genres', lazy='joined')
+    genres = relationship('Genre', secondary=give_users, back_populates='movies', lazy='joined')
 
 
 class Genre(Base, AbstractClass):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(VARCHAR)
-    movies = relationship('Movie', secondary=give_users, back_populates='movies', lazy='joined')
+    movies = relationship('Movie', secondary=give_users, back_populates='genres', lazy='joined')
 
 
 class Channel(Base, AbstractClass):
