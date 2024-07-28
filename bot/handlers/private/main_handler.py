@@ -10,14 +10,22 @@ main_router = Router()
 
 @main_router.message(CommandStart())
 async def command_start_handler(message: Message, bot: Bot) -> None:
-    user_data = message.from_user.model_dump(include={'id', 'first_name', 'last_name', 'username'})
-    if not await User.get(message.from_user.id):
-        await User.create(**user_data)
+    user_data = message.from_user.model_dump(include={'user_id','full_name'})
+    if not  User.get(message.from_user.id):
+        User.create(**user_data)
 
+
+
+
+
+async def command_start_handler(message: Message, bot: Bot) -> None:
+    user_data = message.from_user.model_dump(include={'user_id', 'name'})
+    if User.get(message.from_user.id):
+        await User.create(**user_data)
     categories = await Category.get_all()
     ikb = InlineKeyboardBuilder()
     for category in categories:
         ikb.add(InlineKeyboardButton(text=category.name, callback_data=f'category_{category.id}'))
     ikb.adjust(2, repeat=True)
 
-    await message.answer("Category ni tanlang", reply_markup=ikb.as_markup())
+    await message.answer("Category ni tanlang", reply_markup=ikb.as_markup()

@@ -1,13 +1,18 @@
 import asyncio
 import logging
 import sys
+from os import getenv
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
+from dotenv import load_dotenv
 
 from bot.handlers import private_handler_router
-from config import Configuration
+
+load_dotenv('.env')
+
+TOKEN = getenv("BOT_TOKEN")
 
 
 async def main() -> None:
@@ -15,7 +20,7 @@ async def main() -> None:
     dp.include_router(private_handler_router)
 
     # Initialize Bot instance with default bot properties which will be passed to all API calls
-    bot = Bot(token=Configuration.bot.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
     # And the run events dispatching
     await dp.start_polling(bot)
