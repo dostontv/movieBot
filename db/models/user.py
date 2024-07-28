@@ -5,5 +5,5 @@ from db.base import Base, AbstractClass
 
 
 class User(Base, AbstractClass):
-    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    id: Mapped[int] = mapped_column(BigInteger, unique=True)
     name: Mapped[str] = mapped_column(VARCHAR)
