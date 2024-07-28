@@ -3,7 +3,7 @@ from dataclasses import dataclass, asdict
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv('.env')
 
 
 @dataclass
@@ -50,15 +50,6 @@ class BotConfig(BaseConfig):
 
 
 @dataclass
-class RedisConfig(BaseConfig):
-    """Redis configuration"""
-    URL: str = os.getenv('REDIS_URL')
-    DB: str = os.getenv('REDIS_DB')
-    HOST: str = os.getenv('REDIS_HOST')
-    PORT: str = os.getenv('REDIS_PORT')
-
-
-@dataclass
 class WebConfig(BaseConfig):
     """Web configuration"""
     SECRET_KEY: str = os.getenv('SECRET_KEY')
@@ -69,7 +60,6 @@ class WebConfig(BaseConfig):
 @dataclass
 class Configuration:
     """All in one configuration's class"""
-    rd = RedisConfig()
     db = DatabaseConfig()
     bot = BotConfig()
     web = WebConfig()
