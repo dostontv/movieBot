@@ -49,6 +49,9 @@ async def echo_handler(message: Message) -> None:
 
 
 async def main() -> None:
+    dp = Dispatcher()
+    dp.include_router(private_handler_router)
+
     # Initialize Bot instance with default bot properties which will be passed to all API calls
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
