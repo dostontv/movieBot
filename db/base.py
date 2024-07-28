@@ -2,7 +2,7 @@ from sqlalchemy.orm import DeclarativeBase, declared_attr, Session
 
 from config import DatabaseConfig, conf
 
-from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update
+from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update, Table, Column, Integer, ForeignKey
 from sqlalchemy.future import select
 
 session = Session(conf.db.db_url)
@@ -55,3 +55,11 @@ class AbstractClass:
     @classmethod
     def get_all(cls):
         return (session.execute(select(cls))).scalars()
+
+
+article_author_association = Table(
+    'article_author',
+    Base.metadata,
+    Column('genre_id', Integer, ForeignKey('genres.id')),
+    Column('movie_id', Integer, ForeignKey('movies.id'))
+)
