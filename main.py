@@ -18,6 +18,7 @@ TOKEN = getenv("BOT_TOKEN")
 async def main() -> None:
     dp = Dispatcher()
     dp.include_router(private_handler_router)
+    Base.metadata.create_all(DB.engine)
 
     # Initialize Bot instance with default bot properties which will be passed to all API calls
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
