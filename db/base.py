@@ -1,15 +1,11 @@
-from datetime import datetime
-from sqlalchemy.sql import func
+from sqlalchemy.orm import DeclarativeBase, declared_attr, Session
 
-from sqlalchemy import Enum, ForeignKey, BIGINT, SMALLINT, TEXT, DateTime, Integer, Column
-from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase, declared_attr, Session
+from config import DatabaseConfig
 
-
-session = Session(DB.engine)
+session = Session(DatabaseConfig().db_url)
 
 
 class Base(DeclarativeBase):
-
     @declared_attr
     def __tablename__(self) -> str:
         return self.__name__.lower() + 's'
