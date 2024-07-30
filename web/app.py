@@ -5,7 +5,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette_admin.contrib.sqla import Admin, ModelView
 
 from config import conf
-from db.models import User, Movie, Genre, Channel
+from db.models import User, Movie, Channel
 from web.provider import UsernameAndPasswordProvider
 
 middleware = [
@@ -25,7 +25,6 @@ admin = Admin(
 
 admin.add_view(ModelView(User))
 admin.add_view(ModelView(Movie))
-admin.add_view(ModelView(Genre))
 admin.add_view(ModelView(Channel))
 
 # Mount admin to your app
