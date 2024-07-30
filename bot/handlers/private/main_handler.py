@@ -5,7 +5,7 @@ from aiogram.types import Message
 from db.models import User, Movie
 
 main_router = Router()
-
+from bot.handlers.buttons.inline import search_categori
 
 @main_router.message(F.text.isdigit())
 async def command_isdigit(message: Message):
@@ -25,7 +25,8 @@ async def command_start_handler(message: Message) -> None:
         User.create(id=user.id, name=user.full_name)
     await message.answer(f"""Assalomu alaykum {user.first_name} 🤖
 CineBot - orqali siz o'zingizga yoqqan kinoni topishingiz mumkin 🎬
-Shunchaki kino kodini yoki qidirish bo'limidan kino nomi yoki janiri yuboring va kinoni oling ✅""")
+Shunchaki kino kodini yoki qidirish bo'limidan kino nomi yoki janiri yuboring va kinoni oling ✅""",reply_markup=search_categori())
     await message.bot.copy_message(user.id , '-1002229592627', 14)
+
 
 
