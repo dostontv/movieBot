@@ -16,8 +16,7 @@ from db.base import Base
 async def on_startup(dispatcher: Dispatcher, bot: Bot):
     bot_commands = [
         BotCommand(command="/help", description="Get info about me"),
-        BotCommand(command="/qna", description="set bot for a QnA task"),
-        BotCommand(command="/chat", description="set bot for free chat")
+        BotCommand(command="/qna", description="set bot for a QnA task")
     ]
     await bot.set_my_commands(bot_commands)
 
