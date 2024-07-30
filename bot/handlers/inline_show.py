@@ -13,8 +13,7 @@ async def show_product(inline_query: InlineQuery):
     for movie in movies:
         tmp = InlineQueryResultArticle(
             id=str(movie.id),
-            title=movie.name,
-            description=f'{movie.description} {movie.pixel}',
+            title=f'{movie.name} {movie.pixel}',
             thumbnail_url='https://www.postsessionpodcast.com/wp-content/uploads/2021/04/Movies-small.jpg',
             input_message_content=InputTextMessageContent(message_text=str(movie.id))
         )
