@@ -4,8 +4,8 @@ import sys
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
-from aiogram.enums import ParseMode, BotCommandScopeType
-from aiogram.types import BotCommand, BotCommandScopeChat, BotCommandScopeDefault
+from aiogram.enums import ParseMode
+from aiogram.types import BotCommand
 
 from bot.handlers import handler_router
 from bot.middlewares.channel import CounterMiddleware
@@ -19,7 +19,7 @@ async def on_startup(dispatcher: Dispatcher, bot: Bot):
         BotCommand(command="/qna", description="set bot for a QnA task"),
         BotCommand(command="/chat", description="set bot for free chat")
     ]
-    await bot.set_my_commands(bot_commands, BotCommandScopeChat(type=BotCommandScopeType.ALL_PRIVATE_CHATS,chat_id=6498606371))
+    await bot.set_my_commands(bot_commands)
 
 
 async def main() -> None:
