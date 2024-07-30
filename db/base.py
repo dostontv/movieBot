@@ -1,8 +1,9 @@
-from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update
-from sqlalchemy.future import select
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Session
 
-from config import conf
+from config import DatabaseConfig, conf
+
+from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update, Table, Column, Integer, ForeignKey
+from sqlalchemy.future import select
 
 session = Session(conf.db.db_url)
 
@@ -54,5 +55,4 @@ class AbstractClass:
     @classmethod
     def get_all(cls):
         return (session.execute(select(cls))).scalars()
-
 
