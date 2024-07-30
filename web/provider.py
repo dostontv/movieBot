@@ -7,6 +7,7 @@ from starlette_admin.exceptions import FormValidationError, LoginFailed
 from config import conf
 
 
+# bcrypt.hashpw('1'.encode(), bcrypt.gensalt())
 class UsernameAndPasswordProvider(AuthProvider):
 
     async def login(

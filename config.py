@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-load_dotenv('.env')
+load_dotenv('/home/doston/PycharmProjects/movie/.env')
 
 
 @dataclass
@@ -16,15 +16,16 @@ class BaseConfig:
 @dataclass
 class DatabaseConfig(BaseConfig):
     """Database connection variables"""
-    NAME: str = os.getenv('DB_NAME')
-    USER: str = os.getenv('DB_USER')
-    PASS: str = os.getenv('DB_PASS')
-    HOST: str = os.getenv('DB_HOST')
-    PORT: str = os.getenv('DB_PORT')
+    NAME = os.getenv('DB_NAME')
+    USER = os.getenv('DB_USER')
+    PASS = os.getenv('DB_PASS')
+    HOST = os.getenv('DB_HOST')
+    PORT = os.getenv('DB_PORT')
 
     @property
     def db_url(self):
-        return create_engine(f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}")
+        return create_engine(f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}",
+                             echo=True)
 
 
 @dataclass
