@@ -13,7 +13,9 @@ async def command_isdigit(message: Message):
     if not movie:
         await message.answer("Kino topilmadi")
     else:
-        await message.answer(movie.name)
+        await message.bot.forward_message(message.from_user.id , '-1002229592627' ,movie.id)
+
+
 
 
 @main_router.message(CommandStart())
@@ -24,3 +26,6 @@ async def command_start_handler(message: Message) -> None:
     await message.answer(f"""Assalomu alaykum {user.first_name} 🤖
 CineBot - orqali siz o'zingizga yoqqan kinoni topishingiz mumkin 🎬
 Shunchaki kino kodini yoki qidirish bo'limidan kino nomi yoki janiri yuboring va kinoni oling ✅""")
+    await message.bot.copy_message(user.id , '-1002229592627', 14)
+
+

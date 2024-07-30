@@ -24,8 +24,7 @@ class DatabaseConfig(BaseConfig):
 
     @property
     def db_url(self):
-        return create_engine(f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}",
-                             echo=True)
+        return create_engine(f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}")
 
 
 @dataclass
