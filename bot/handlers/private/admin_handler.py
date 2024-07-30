@@ -9,14 +9,18 @@ admin_router = Router()
 
 @admin_router.message(IsAdminFilter(), F.video)
 async def command_video_handler(message: Message) -> None:
-    if message.caption:
+    data = message.caption.split('\n')
+    if message.caption and len(data) >1:
         a = await message.copy_to('-1002229592627', disable_notification=False)
-        data = message.caption.split('\n')
-        Movie.create(id=a.message_id, name=data[0], pixel=data[1])
+        file_size_bytes = message.video.file_size
+        file_size_mb = file_size_bytes / 1048576
+        Movie.create(id=a.message_id, name=message.video.file_name, pixel=data[1] , size =file_size_mb)
         await message.answer(f"bazaga qo'shildi {a.message_id}")
-
 
 @admin_router.message(IsAdminFilter(), F.voice)
 async def command_voice_handler(message: Message):
     a = await message.copy_to('-1002229592627')
     await message.answer(f"keldi,{a.message_id}")
+
+
+
