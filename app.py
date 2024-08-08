@@ -1,26 +1,22 @@
-import os
-import sys
-
 import uvicorn
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette_admin.contrib.sqla import Admin, ModelView
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import config
+from config import conf
 from db.models import User, Movie, Channel
-from web.provider import UsernameAndPasswordProvider
+from provider import UsernameAndPasswordProvider
 
 middleware = [
-    Middleware(SessionMiddleware, secret_key=config.conf.web.SECRET_KEY)
+    Middleware(SessionMiddleware, secret_key=conf.web.SECRET_KEY)
 ]
 
 app = Starlette(middleware=middleware)
 
 logo_url = 'https://cdn2.iconfinder.com/data/icons/business-1334/53/145-512.png'
 admin = Admin(
-    engine=config.conf.db.db_url,
+    engine=conf.db.db_url,
     title="Aiogram Web Admin",
     base_url='/',
     logo_url=logo_url,
