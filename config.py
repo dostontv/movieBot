@@ -4,7 +4,7 @@ from dataclasses import dataclass, asdict
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-load_dotenv('/home/doston/PycharmProjects/movie/.env')
+load_dotenv('.env')
 
 
 @dataclass
@@ -34,11 +34,11 @@ class BotConfig(BaseConfig):
     BOT_TOKEN: str = os.getenv('BOT_TOKEN')
     ADMIN_LIST: str = os.getenv('ADMIN_LIST')
 
-    # WEB_SERVER_HOST: str = os.getenv('WEB_SERVER_HOST')
-    # WEB_SERVER_PORT: int = int(os.getenv('WEB_SERVER_PORT', 8080))
-    # WEBHOOK_PATH = "/webhook"
-    # WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
-    # BASE_WEBHOOK_URL = os.getenv('BASE_WEBHOOK_URL')
+    WEB_SERVER_HOST: str = os.getenv('WEB_SERVER_HOST')
+    WEB_SERVER_PORT: int = int(os.getenv('WEB_SERVER_PORT', 8080))
+    WEBHOOK_PATH = os.getenv('WEBHOOK_PATH')
+    WEBHOOK_SECRET = os.getenv('WEBHOOK_SECRET')
+    BASE_WEBHOOK_URL = os.getenv('BASE_WEBHOOK_URL')
 
     # MAIN_BOT_PATH: str = "/webhook/main"
     # OTHER_BOTS_PATH: str = "/webhook/bot/{bot_token}"

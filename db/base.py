@@ -1,8 +1,10 @@
 from sqlalchemy.orm import DeclarativeBase, declared_attr, Session
+from sqlalchemy.sql.operators import like_op
 
 from config import DatabaseConfig, conf
 
-from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update, Table, Column, Integer, ForeignKey
+from sqlalchemy import delete as sqlalchemy_delete, update as sqlalchemy_update, Table, Column, Integer, ForeignKey, \
+    text
 from sqlalchemy.future import select
 
 session = Session(conf.db.db_url)
@@ -56,3 +58,11 @@ class AbstractClass:
     def get_all(cls):
         return (session.execute(select(cls))).scalars()
 
+    @classmethod
+    def get_all_movies(cls, a):
+        if not a:
+            return (session.execute(select(cls))).scalars()
+        return session.execute(text(f"""
+            SELECT * FROM movies 
+            WHERE similarity(name, :a) > 0.1 OR SOUNDEX(name) = SOUNDEX(:a)
+            """), {'a': a}).fetchmany(50)

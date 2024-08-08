@@ -15,6 +15,7 @@ class Movie(Base, AbstractClass):
     pixel: Mapped[str] = mapped_column(VARCHAR(10))
     size: Mapped[str] = mapped_column(VARCHAR(10))
 
+
 class Channel(Base, AbstractClass):
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(VARCHAR)
