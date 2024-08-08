@@ -53,6 +53,7 @@ class BotConfig(BaseConfig):
 @dataclass
 class WebConfig(BaseConfig):
     """Web configuration"""
+    DOMAIN: str = os.getenv('DOMAIN')
     SECRET_KEY: str = os.getenv('SECRET_KEY')
     USERNAME: str = os.getenv('ADMIN_USERNAME')
     PASSWD: str = os.getenv('ADMIN_PASSWORD')
