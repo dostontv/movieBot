@@ -7,11 +7,10 @@ from starlette.middleware import Middleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette_admin.contrib.sqla import Admin, ModelView
 
-from db.models import User, Movie, Channel
-from web.provider import UsernameAndPasswordProvider
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import config
+from db.models import User, Movie, Channel
+from web.provider import UsernameAndPasswordProvider
 
 middleware = [
     Middleware(SessionMiddleware, secret_key=config.conf.web.SECRET_KEY)
